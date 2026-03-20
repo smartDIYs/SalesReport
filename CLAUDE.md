@@ -13,6 +13,7 @@ npm run dev            # サーバー(3001) + クライアント(5173) 同時起
 npm run dev:server     # Express サーバーのみ (node --watch server.js)
 npm run dev:client     # Vite 開発サーバーのみ
 npm run build          # フロントエンドのプロダクションビルド (dist/)
+npm start              # 本番サーバー起動（dist/ を配信）
 ```
 
 CSV検証スクリプト（EC-CUBE管理画面の売上レポートCSVと比較）:
@@ -26,10 +27,12 @@ smartDIYs Store（EC-CUBE 4）の売上分析ダッシュボード。Express バ
 
 ### バックエンド (server.js)
 
+- ベーシック認証（`BASIC_AUTH_USER` / `BASIC_AUTH_PASS` 環境変数で制御、未設定時は無効）
 - EC-CUBE OAuth2 認証フロー（認可コード + リフレッシュトークン）
 - トークンは `.token.json` にファイル永続化
 - GraphQL でオーダー・商品を取得し、サーバー側で集計
 - 注文ステータス 3（取消し）・9（返品）を除外
+- 本番環境では `dist/` の静的ファイルを配信し、SPA フォールバックで全ルートを処理
 
 **API エンドポイント:**
 - `/auth/login`, `/auth/callback` — OAuth2 フロー
@@ -67,3 +70,21 @@ Vite の proxy で `/api` と `/auth` をバックエンド (localhost:3001) に
 ## 環境設定
 
 `.env.example` を `.env` にコピーして EC-CUBE OAuth2 クレデンシャルを設定。
+
+主な環境変数:
+- `ECCUBE_BASE_URL` — EC-CUBE サイトURL
+- `ECCUBE_AUTHORIZE_URL` — OAuth2 認可エンドポイント
+- `ECCUBE_TOKEN_URL` — OAuth2 トークンエンドポイント
+- `ECCUBE_CLIENT_ID` / `ECCUBE_CLIENT_SECRET` — OAuth2 クライアント認証情報
+- `BASE_URL` — 本番環境のアプリURL（OAuth2 コールバック・リダイレクト先に使用）
+- `BASIC_AUTH_USER` / `BASIC_AUTH_PASS` — ベーシック認証（設定時のみ有効）
+- `PORT` — サーバーポート（デフォルト: 3001）
+
+## デプロイ
+
+Render（Free プラン）にデプロイ。GitHub 連携で main ブランチへのプッシュ時に自動デプロイ。
+
+- **URL**: https://salesreport-xcr2.onrender.com
+- **Build Command**: `npm install && npm run build`
+- **Start Command**: `npm start`
+- EC-CUBE 側で本番用の OAuth2 クライアント（リダイレクトURI: `https://salesreport-xcr2.onrender.com/auth/callback`）を別途登録する必要がある

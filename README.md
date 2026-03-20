@@ -37,10 +37,28 @@ npm run dev
 | `npm run build` | フロントエンドのプロダクションビルド |
 | `npm start` | 本番サーバー起動（dist/ を配信） |
 
+## 環境変数
+
+| 変数名 | 説明 | 必須 |
+|--------|------|------|
+| `ECCUBE_BASE_URL` | EC-CUBE サイトURL | Yes |
+| `ECCUBE_AUTHORIZE_URL` | OAuth2 認可エンドポイント | Yes |
+| `ECCUBE_TOKEN_URL` | OAuth2 トークンエンドポイント | Yes |
+| `ECCUBE_CLIENT_ID` | OAuth2 クライアントID | Yes |
+| `ECCUBE_CLIENT_SECRET` | OAuth2 クライアントシークレット | Yes |
+| `BASE_URL` | 本番環境のアプリURL | 本番のみ |
+| `BASIC_AUTH_USER` | ベーシック認証ユーザー名 | No |
+| `BASIC_AUTH_PASS` | ベーシック認証パスワード | No |
+| `PORT` | サーバーポート（デフォルト: 3001） | No |
+
+`BASIC_AUTH_USER` と `BASIC_AUTH_PASS` を両方設定するとベーシック認証が有効になる。
+
 ## デプロイ
 
-Render（Free プラン）にデプロイ済み。
+Render（Free プラン）にデプロイ済み。GitHub の main ブランチへのプッシュで自動デプロイ。
 
+- **URL**: https://salesreport-xcr2.onrender.com
 - **Build Command**: `npm install && npm run build`
 - **Start Command**: `npm start`
-- 環境変数: `ECCUBE_BASE_URL`, `ECCUBE_AUTHORIZE_URL`, `ECCUBE_TOKEN_URL`, `ECCUBE_CLIENT_ID`, `ECCUBE_CLIENT_SECRET`, `BASE_URL`
+
+EC-CUBE 側で本番URL用の OAuth2 クライアント（リダイレクトURI: `https://salesreport-xcr2.onrender.com/auth/callback`）を別途登録する必要がある。
