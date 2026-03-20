@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.smartdiys.com)",
+      "Bash(echo:*)",
+      "Bash(npm run build:*)",
+      "Bash(node -e:*)",
+      "Bash(npm install:*)",
+      "Bash(curl:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npm info:*)",
+      "Bash(open:*)",
+      "Bash(python3:*)",
+      "Bash(npx vite:*)",
+      "Bash(iconv -f SHIFT_JIS -t UTF-8 /Users/yoshiya/Claude/ec-cube/salesreport_product_20260312102529.csv)",
+      "Bash(iconv -f SHIFT_JIS -t UTF-8 /Users/yoshiya/Claude/ec-cube/salesreport_product_20260312103837.csv)",
+      "Bash(iconv -f SHIFT_JIS -t UTF-8 /Users/yoshiya/Claude/ec-cube/salesreport_product_20260312103837.csv | tail -n +2 | cut -d',' -f1 | tr -d '\"' | grep -v '^$' | sed 's/^\\\\\\(..\\\\\\).*/\\\\1/' | tr '[:lower:]' '[:upper:]' | sort -u)",
+      "WebSearch",
+      "Bash(claude --version 2>&1)",
+      "Bash(claude /chrome 2>&1 | head -5)",
+      "Bash(claude chrome-extension:*)",
+      "Bash(CLAUDECODE= claude chrome-extension install 2>&1)",
+      "Bash(node verify.js salesreport_product_20260312103837.csv 2026 2)",
+      "Bash(cd /Users/yoshiya/Claude/ec-cube && node -e \"\nimport axios from 'axios';\nimport dotenv from 'dotenv';\ndotenv.config\\(\\);\n\n// Introspection query to check Order type fields\nconst query = \\\\`{\n  __type\\(name: \\\\\"Order\\\\\"\\) {\n    fields {\n      name\n      type { name kind ofType { name } }\n    }\n  }\n}\\\\`;\n\nconst res = await axios.post\\(process.env.ECCUBE_BASE_URL + '/api', { query }, {\n  headers: {\n    Authorization: 'Bearer ' + \\(await getToken\\(\\)\\),\n    'Content-Type': 'application/json',\n  },\n}\\);\nconsole.log\\(JSON.stringify\\(res.data, null, 2\\)\\);\n\nasync function getToken\\(\\) {\n  // Read token from server - we need to get one first\n  const basicAuth = Buffer.from\\(process.env.ECCUBE_CLIENT_ID + ':' + process.env.ECCUBE_CLIENT_SECRET\\).toString\\('base64'\\);\n  // For now, use refresh flow or check if server is running\n  const statusRes = await axios.get\\('http://localhost:3001/api/auth/status'\\);\n  if \\(!statusRes.data.authenticated\\) {\n    throw new Error\\('Not authenticated'\\);\n  }\n  // We can't easily get the token from the server, so let's use the GraphQL introspection via the proxy\n  const proxyRes = await axios.post\\('http://localhost:5173/api/sales?year=2026&month=3&introspect=1'\\);\n  return null;\n}\n\" 2>&1 | head -50)",
+      "Bash(sleep 2 && node -e '\nconst http = require\\(\"http\"\\);\nconst req = http.request\\({ hostname: \"localhost\", port: 3001, path: \"/api/introspect?type=Order\", method: \"GET\" }, \\(res\\) => {\n  let data = \"\";\n  res.on\\(\"data\", \\(chunk\\) => data += chunk\\);\n  res.on\\(\"end\", \\(\\) => {\n    const j = JSON.parse\\(data\\);\n    if \\(j.__type && j.__type.fields\\) {\n      j.__type.fields.forEach\\(f => {\n        const typeName = f.type.name || \\(f.type.ofType ? f.type.ofType.name || \\(f.type.ofType.ofType ? f.type.ofType.ofType.name : f.type.kind\\) : f.type.kind\\);\n        console.log\\(f.name.padEnd\\(30\\), typeName\\);\n      }\\);\n    } else {\n      console.log\\(JSON.stringify\\(j, null, 2\\)\\);\n    }\n  }\\);\n}\\);\nreq.end\\(\\);\n' 2>&1)",
+      "Bash(sleep 3 && node -e '\nconst http = require\\(\"http\"\\);\nconst req = http.request\\({ hostname: \"localhost\", port: 3001, path: \"/api/auth/status\", method: \"GET\" }, \\(res\\) => {\n  let data = \"\";\n  res.on\\(\"data\", \\(chunk\\) => data += chunk\\);\n  res.on\\(\"end\", \\(\\) => console.log\\(data\\)\\);\n}\\);\nreq.end\\(\\);\n' 2>&1)",
+      "Bash(iconv -f SHIFT_JIS -t UTF-8 product_20260312114352.csv | head -5)",
+      "Bash(iconv -f SHIFT_JIS -t UTF-8 product_20260312114352.csv | wc -l)",
+      "Bash(iconv -f SHIFT_JIS -t UTF-8 product_20260312114352.csv)",
+      "Bash(find /Users/yoshiya/Claude/ec-cube -maxdepth 2 -name \"README*\" -o -name \".cursor*\" -o -name \".github*\" 2>/dev/null | grep -v node_modules)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git rm:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}

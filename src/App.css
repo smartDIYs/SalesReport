@@ -1,0 +1,702 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+  background: #f8f9fa;
+  color: #202124;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* === Top Navigation Bar === */
+.topbar {
+  background: #fff;
+  border-bottom: 1px solid #dadce0;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.topbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: auto;
+}
+
+.topbar-logo svg {
+  width: 24px;
+  height: 24px;
+}
+
+.topbar-title {
+  font-family: 'Google Sans', 'Noto Sans JP', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #5f6368;
+  letter-spacing: 0;
+}
+
+.topbar-title span {
+  color: #202124;
+  font-weight: 500;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.topbar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #5f6368;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 14px;
+}
+
+.topbar-btn:hover {
+  background: #f1f3f4;
+}
+
+.logout-btn {
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  background: transparent;
+  color: #5f6368;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+}
+
+.logout-btn:hover {
+  background: #f1f3f4;
+  border-color: #c6c9cc;
+}
+
+/* === Nav Tabs === */
+.nav-tabs {
+  display: flex;
+  gap: 0;
+  background: #fff;
+  border-bottom: 1px solid #dadce0;
+  padding: 0 24px;
+}
+
+.nav-tab {
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Google Sans', 'Noto Sans JP', sans-serif;
+  color: #5f6368;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  margin-bottom: -1px;
+}
+
+.nav-tab:hover {
+  color: #1a73e8;
+  background: #f8f9fa;
+}
+
+.nav-tab.active {
+  color: #1a73e8;
+  border-bottom-color: #1a73e8;
+}
+
+/* === Main Content === */
+.app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.main-content {
+  padding: 24px;
+}
+
+/* === Date Controls === */
+.controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.controls-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-title {
+  font-family: 'Google Sans', 'Noto Sans JP', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: #202124;
+}
+
+.date-selector {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.date-selector select {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+  background: transparent;
+  color: #202124;
+  cursor: pointer;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='%235f6368'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 4px center;
+  padding-right: 20px;
+}
+
+.date-selector select:hover {
+  background-color: #f1f3f4;
+}
+
+.date-separator {
+  color: #dadce0;
+  font-size: 18px;
+  padding: 0 2px;
+}
+
+.date-range-arrow {
+  color: #5f6368;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 0 4px;
+}
+
+.fetch-btn {
+  padding: 9px 24px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Google Sans', 'Noto Sans JP', sans-serif;
+  background: #1a73e8;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 1px 2px rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+}
+
+.fetch-btn:hover {
+  background: #1765cc;
+  box-shadow: 0 1px 3px rgba(60,64,67,0.4), 0 2px 8px 2px rgba(60,64,67,0.15);
+}
+
+.fetch-btn:active {
+  background: #185abc;
+}
+
+.fetch-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* === Auth === */
+.auth-prompt {
+  text-align: center;
+  padding: 100px 24px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #dadce0;
+  margin: 24px;
+}
+
+.auth-prompt p {
+  font-size: 16px;
+  color: #5f6368;
+  margin-bottom: 24px;
+}
+
+.login-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 32px;
+  background: #1a73e8;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Google Sans', 'Noto Sans JP', sans-serif;
+  transition: all 0.2s;
+  box-shadow: 0 1px 2px rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+}
+
+.login-btn:hover {
+  background: #1765cc;
+  box-shadow: 0 1px 3px rgba(60,64,67,0.4), 0 2px 8px 2px rgba(60,64,67,0.15);
+}
+
+/* === Metric Cards === */
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.metric-card {
+  background: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  padding: 20px 24px;
+  transition: box-shadow 0.2s;
+}
+
+.metric-card:hover {
+  box-shadow: 0 1px 3px rgba(60,64,67,0.15), 0 4px 8px 3px rgba(60,64,67,0.08);
+}
+
+.metric-card.primary {
+  border-left: 3px solid #1a73e8;
+}
+
+.metric-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #5f6368;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metric-value {
+  font-family: 'Google Sans', 'Roboto', sans-serif;
+  font-size: 28px;
+  font-weight: 500;
+  color: #202124;
+  letter-spacing: -0.5px;
+}
+
+.metric-value.small {
+  font-size: 22px;
+}
+
+.metric-sub {
+  font-size: 12px;
+  color: #5f6368;
+  margin-top: 4px;
+}
+
+/* === Category Table === */
+.table-card {
+  background: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid #dadce0;
+}
+
+.table-title {
+  font-family: 'Google Sans', 'Noto Sans JP', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #202124;
+}
+
+.sales-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.sales-table thead {
+  background: #f8f9fa;
+}
+
+.sales-table th {
+  padding: 12px 24px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 500;
+  color: #5f6368;
+  border-bottom: 1px solid #dadce0;
+  white-space: nowrap;
+}
+
+.sales-table th.right,
+.sales-table td.right {
+  text-align: right;
+}
+
+.sales-table td {
+  padding: 14px 24px;
+  font-size: 14px;
+  border-bottom: 1px solid #e8eaed;
+  color: #202124;
+}
+
+.sales-table tbody tr {
+  transition: background 0.15s;
+}
+
+.sales-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.sales-table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+.cat-name {
+  font-weight: 500;
+  color: #202124;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cat-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.cell-amount {
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: #202124;
+}
+
+.cell-count {
+  font-size: 12px;
+  color: #80868b;
+  margin-top: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+.subtotal-cell .cell-amount {
+  font-size: 14px;
+  font-weight: 500;
+  color: #202124;
+}
+
+/* Progress Bar */
+.bar-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.bar-track {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: #e8eaed;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.percentage {
+  font-size: 12px;
+  color: #5f6368;
+  min-width: 38px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+/* Footer */
+.sales-table tfoot td {
+  padding: 14px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  border-top: 2px solid #dadce0;
+  background: #f8f9fa;
+  color: #202124;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Uncategorized Note */
+.excluded-note {
+  font-size: 12px;
+  color: #80868b;
+  padding: 12px 24px;
+  border-top: 1px solid #e8eaed;
+  background: #f8f9fa;
+}
+
+/* === States === */
+.loading {
+  text-align: center;
+  padding: 60px;
+  color: #5f6368;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid #e8eaed;
+  border-top-color: #1a73e8;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.error {
+  background: #fce8e6;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  padding: 14px 18px;
+  color: #c5221f;
+  font-size: 13px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.empty {
+  text-align: center;
+  padding: 80px 24px;
+  color: #80868b;
+  font-size: 14px;
+}
+
+.empty svg {
+  display: block;
+  margin: 0 auto 16px;
+  opacity: 0.4;
+}
+
+/* === Customer Ranking === */
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'Google Sans', 'Roboto', sans-serif;
+}
+
+.customer-name {
+  font-weight: 500;
+  color: #202124;
+  font-size: 14px;
+}
+
+.customer-kana {
+  font-size: 11px;
+  color: #80868b;
+  margin-top: 1px;
+}
+
+.customer-company {
+  font-size: 14px;
+  font-weight: 500;
+  color: #202124;
+}
+
+.ranking-table td {
+  vertical-align: top;
+}
+
+.top-products {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.top-product-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.top-product-name {
+  color: #202124;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
+}
+
+.top-product-detail {
+  color: #80868b;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+/* === Trends Page === */
+.chart-container {
+  padding: 16px 24px 24px;
+}
+
+.category-charts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.category-chart-card .table-header {
+  padding: 12px 20px;
+}
+
+.category-chart-card .table-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.category-chart-card .chart-container {
+  padding: 8px 12px 16px;
+}
+
+.trends-tooltip {
+  background: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  box-shadow: 0 2px 6px rgba(60,64,67,0.15);
+  font-size: 13px;
+}
+
+.trends-tooltip-label {
+  font-weight: 500;
+  color: #202124;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.trends-tooltip-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 0;
+}
+
+.trends-tooltip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.trends-tooltip-name {
+  color: #5f6368;
+  flex: 1;
+}
+
+.trends-tooltip-value {
+  font-weight: 500;
+  color: #202124;
+  font-variant-numeric: tabular-nums;
+}
+
+/* === Responsive === */
+@media (max-width: 900px) {
+  .metrics-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .category-charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .main-content {
+    padding: 16px;
+  }
+
+  .metrics-row {
+    grid-template-columns: 1fr;
+  }
+
+  .sales-table th,
+  .sales-table td {
+    padding: 12px 16px;
+    font-size: 13px;
+  }
+
+  .metric-value {
+    font-size: 22px;
+  }
+
+  .topbar {
+    padding: 0 16px;
+  }
+
+  .controls-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
