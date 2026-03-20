@@ -16,6 +16,22 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// ベーシック認証（BASIC_AUTH_USER / BASIC_AUTH_PASS が設定されている場合のみ有効）
+const BASIC_USER = process.env.BASIC_AUTH_USER;
+const BASIC_PASS = process.env.BASIC_AUTH_PASS;
+if (BASIC_USER && BASIC_PASS) {
+  app.use((req, res, next) => {
+    const auth = req.headers.authorization;
+    if (auth) {
+      const [, encoded] = auth.split(' ');
+      const [user, pass] = Buffer.from(encoded, 'base64').toString().split(':');
+      if (user === BASIC_USER && pass === BASIC_PASS) return next();
+    }
+    res.set('WWW-Authenticate', 'Basic realm="SalesReport"');
+    res.status(401).send('認証が必要です');
+  });
+}
+
 // 本番環境: ビルド済みフロントエンドを配信
 app.use(express.static(path.join(__dirname, 'dist')));
 
