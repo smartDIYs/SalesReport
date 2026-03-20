@@ -4,12 +4,20 @@ import dotenv from 'dotenv';
 import axios from 'axios';
 import crypto from 'crypto';
 import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// 本番環境: ビルド済みフロントエンドを配信
+app.use(express.static(path.join(__dirname, 'dist')));
 
 const ECCUBE_BASE_URL = process.env.ECCUBE_BASE_URL;
 const ECCUBE_AUTHORIZE_URL = process.env.ECCUBE_AUTHORIZE_URL;
@@ -17,7 +25,8 @@ const ECCUBE_TOKEN_URL = process.env.ECCUBE_TOKEN_URL;
 const ECCUBE_CLIENT_ID = process.env.ECCUBE_CLIENT_ID;
 const ECCUBE_CLIENT_SECRET = process.env.ECCUBE_CLIENT_SECRET;
 const PORT = process.env.PORT || 3001;
-const REDIRECT_URI = `http://localhost:${PORT}/auth/callback`;
+const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
+const REDIRECT_URI = `${BASE_URL}/auth/callback`;
 const TOKEN_FILE = '.token.json';
 
 // === 6カテゴリ定義 ===
@@ -168,7 +177,7 @@ app.get('/auth/callback', async (req, res) => {
       expiresAt: Date.now() + (expires_in ?? 3600) * 1000,
     };
     saveToken();
-    res.redirect('http://localhost:5173/?auth=success');
+    res.redirect(`${BASE_URL}/?auth=success`);
   } catch (err) {
     console.error('トークン取得エラー:', err.response?.data ?? err.message);
     res.status(500).send('トークンの取得に失敗しました');
@@ -505,6 +514,11 @@ app.get('/api/sales', async (req, res) => {
     const status = err.message.includes('未認証') || err.message.includes('再認証') ? 401 : 500;
     res.status(status).json({ error: err.message });
   }
+});
+
+// SPA フォールバック: API/auth 以外のリクエストは index.html を返す
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 app.listen(PORT, () => {
